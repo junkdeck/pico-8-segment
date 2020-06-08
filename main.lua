@@ -47,6 +47,8 @@ function _init()
 
   ctype = 12
   zone=0
+  alarmset=false
+
 end
 
 function _update()
@@ -75,6 +77,8 @@ function _draw()
     spr(zone, 104, 48)
     spr(10, 110, 48)
   end
+
+  if(alarmset) then spr(7, 108, 58) end
 
   stringdigit(fh,loff,64-toff)
   if(s % 2 == 0) then
