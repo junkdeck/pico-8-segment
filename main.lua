@@ -45,7 +45,10 @@ function _init()
     c = { '000', '300', '000', '301', '000', '300', '000', '301', },
   }
 
-  ctype = 12
+  ct = 1
+  ctypes={12, 24}
+  ctype = ctypes[ct+1]
+
   zone=0
   alarmset=false
 
@@ -66,6 +69,12 @@ function _update()
 
   fh=h%ctype --formatted hour
   if(ctype!=24 and fh==0)then fh=12 end
+
+  -- toggle clock hour mode
+  if(btnp(5)) then
+    ct = ct ^^ 1
+    ctype=ctypes[ct+1]
+  end
 end
 
 function _draw()
