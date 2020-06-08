@@ -54,11 +54,20 @@ function _update()
   h = stat(93)
   m = stat(94)
   s = stat(95)
+
+  -- left offset
+  loff = 12
+  -- top offset
+  toff = 12
 end
 
 function _draw()
   cls()
-  -- print(year.."/"..day.."/"..month)
 
-  drawdigit(nums[8])
+  stringdigit(fh,loff,64-toff)
+  if(s % 2 == 0) then
+    stringdigit("c",loff+36,64-toff)
+  end
+  stringdigit(m,loff+56,64-toff, 0 )
+  --print(year.."/"..day.."/"..month, 24, 88,8)
 end
