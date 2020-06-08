@@ -45,6 +45,8 @@ function _init()
     c = { '000', '300', '000', '301', '000', '300', '000', '301', },
   }
 
+  ctype = 12
+  zone=0
 end
 
 function _update()
@@ -59,10 +61,20 @@ function _update()
   loff = 12
   -- top offset
   toff = 12
+
+  fh=h%ctype --formatted hour
+  if(ctype!=24 and fh==0)then fh=12 end
 end
 
 function _draw()
   cls()
+
+  color(8)
+  if(ctype!=24) then
+    if(h < 12) then zone=8 else zone=9 end
+    spr(zone, 104, 48)
+    spr(10, 110, 48)
+  end
 
   stringdigit(fh,loff,64-toff)
   if(s % 2 == 0) then
