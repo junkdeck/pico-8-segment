@@ -51,6 +51,9 @@ function _update()
   year = stat(90)
   month = stat(91)
   day = stat(92)
+  h = stat(93)
+  m = stat(94)
+  s = stat(95)
 end
 
 function _draw()
