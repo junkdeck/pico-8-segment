@@ -80,6 +80,20 @@ end
 function _draw()
   cls()
 
+  -- swap dark purple with alternative palette 
+  pal(2,129,1)
+  pal(8,2)
+  -- draw inactive LCD segments
+  drawdigit(nums[8],loff, 64-toff)
+  drawdigit(nums[8],loff+18, 64-toff)
+  drawdigit(nums.c,loff+36, 64-toff)
+  drawdigit(nums[8],loff+56, 64-toff)
+  drawdigit(nums[8],loff+74, 64-toff)
+  spr(8, 104, 48)
+  spr(7, 108, 58)
+  spr(10, 110, 48)
+  pal(8,8)
+
   color(8)
   if(ctype!=24) then
     if(h < 12) then zone=8 else zone=9 end
