@@ -1,4 +1,22 @@
+function stringdigit(n, x, y, pad)
+  pad = pad or " "
+  x = x or 0
+  y = y or 0
+  ns=tostr(n)
+  if(#ns==1 and ns != "c") then ns=pad..ns end
+  for i=1,#ns do
+    c=sub(ns,i,i)
+    if(c != "c") then 
+      c = tonum(c) 
+    end
+    t=nums[c]
+
+    drawdigit(t, x+(18*(i-1)), y)
+  end
+end
+
 function drawdigit(t, x, y)
+  -- draws a digit from supplied table
   x = x or 0
   y = y or 0
   for i,v in ipairs(t) do
