@@ -57,6 +57,8 @@ function drawdigit(t, x, y)
 end
 
 function _init()
+  x_timer = 1
+
 
   ct = 1
   ctypes={12, 24}
@@ -84,9 +86,14 @@ function _update()
   if(ctype!=24 and fh==0)then fh=12 end
 
   -- toggle clock hour mode
-  if(btnp(5)) then
-    ct = ct ^^ 1
-    ctype=ctypes[ct+1]
+  if(btn(5)) then
+    x_timer += 1
+  elseif(x_timer > 0) then
+    if(x_timer < CHR_TIMER_THRESH) then
+      ct = ct ^^ 1
+      ctype=ctypes[ct+1]
+    end
+    x_timer = 0
   end
 
   datestr = weekday(year, month, day)..", "..months[month].." ".."9".." "..year
