@@ -1,3 +1,29 @@
+function dayofweek()
+
+end
+
+function anchor(year)
+  return 5*((year\100)%4)+2
+end
+
+function doomsday(year)
+  x = anchor(year)
+  y = year%100 -- last two digits
+
+  a=y\12
+  b=y%12
+  c=b\4
+  d=(a+b+c)%7
+
+  return (x+d)%7 -- doomsday
+end
+
+function weekday(year, month, day)
+  x = doomsday(year)
+  y = ((day)+x)\7
+  return days[(y+1)%#days]
+end
+
 function stringdigit(n, x, y, pad)
   pad = pad or " "
   x = x or 0
@@ -43,6 +69,10 @@ function _init()
     [8] = { '100', '110', '400', '410', '401', '411', '101', '111', },
     [9] = { '100', '110', '400', '410', '511', '411', '211', '111', },
     c = { '000', '300', '000', '301', '000', '300', '000', '301', },
+  }
+
+  days = {
+    "sun", "mon", "tue", "wed", "thu", "fri", "sat"
   }
 
   ct = 1
