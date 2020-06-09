@@ -1,6 +1,3 @@
-function dayofweek()
-
-end
 
 function anchor(year)
   return 5*((year\100)%4)+2
@@ -57,7 +54,8 @@ function drawdigit(t, x, y)
 end
 
 function _init()
-  x_timer = 1
+  xt = 1
+  xp = 0 -- x pressed
 
 
   ct = 1
@@ -67,6 +65,10 @@ function _init()
   zone=0
   alarmset=false
 
+  -- left offset
+  loff = 12
+  -- top offset
+  toff = 16
 end
 
 function _update()
@@ -77,11 +79,6 @@ function _update()
   m = stat(94)
   s = stat(95)
 
-  -- left offset
-  loff = 12
-  -- top offset
-  toff = 12
-
   fh=h%ctype --formatted hour
   if(ctype!=24 and fh==0)then fh=12 end
 
@@ -91,13 +88,15 @@ function _update()
   end
   -- toggle clock hour mode
   if(btn(5)) then
-    x_timer += 1
-  elseif(x_timer > 0) then
-    if(x_timer < CHR_TIMER_THRESH) then
+    xp = 1
+    xt += 1
+  elseif(xt > 0 and xp == 1) then
+    xp = 0
+    if(xt < SHORTPRESS) then
       ct = ct ^^ 1
       ctype=ctypes[ct+1]
     end
-    x_timer = 0
+    xt = 0
   end
 
   datestr = weekday(year, month, day)..", "..months[month].." ".."9".." "..year
@@ -115,19 +114,19 @@ function _draw()
   drawdigit(nums.c,loff+36, 64-toff)
   drawdigit(nums[8],loff+56, 64-toff)
   drawdigit(nums[8],loff+74, 64-toff)
-  spr(8, 104, 48)
-  spr(7, 108, 58)
-  spr(10, 110, 48)
+  spr(8, 104, 60-toff)
+  spr(10, 110, 60-toff)
+  spr(7, 108, 70-toff)
   pal(8,8)
 
   color(8)
   if(ctype!=24) then
     if(h < 12) then zone=8 else zone=9 end
-    spr(zone, 104, 48)
-    spr(10, 110, 48)
+    spr(zone, 104, 60-toff)
+    spr(10, 110, 60-toff)
   end
 
-  if(alarmset) then spr(7, 108, 58) end
+  if(alarmset) then spr(7, 108, 70-toff) end
 
   stringdigit(fh,loff,64-toff)
   if(s % 2 == 0) then
@@ -136,6 +135,5 @@ function _draw()
   stringdigit(m,loff+56,64-toff, 0 )
 
   color(8)
-  print(datestr, 65-((#datestr/2)*5), 92)
-
+  print(datestr, 64-((#datestr/2)*4), 104-toff)
 end
