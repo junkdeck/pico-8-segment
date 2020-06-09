@@ -74,6 +74,9 @@ function _init()
   days = {
     "sun", "mon", "tue", "wed", "thu", "fri", "sat"
   }
+  months = {
+    "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"
+  }
 
   ct = 1
   ctypes={12, 24}
@@ -105,6 +108,8 @@ function _update()
     ct = ct ^^ 1
     ctype=ctypes[ct+1]
   end
+
+  datestr = weekday(year, month, day)..", "..months[month].." ".."9".." "..year
 end
 
 function _draw()
@@ -138,5 +143,8 @@ function _draw()
     stringdigit("c",loff+36,64-toff)
   end
   stringdigit(m,loff+56,64-toff, 0 )
-  --print(year.."/"..day.."/"..month, 24, 88,8)
+
+  color(8)
+  print(datestr, 65-((#datestr/2)*5), 92)
+
 end
