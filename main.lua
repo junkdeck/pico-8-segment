@@ -85,6 +85,10 @@ function _update()
   fh=h%ctype --formatted hour
   if(ctype!=24 and fh==0)then fh=12 end
 
+  -- toggle alarm
+  if(btnp(4)) then
+    alarmset = not alarmset 
+  end
   -- toggle clock hour mode
   if(btn(5)) then
     x_timer += 1
