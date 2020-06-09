@@ -1,5 +1,5 @@
-MODE_TIMER = 90 -- setting time mode timer
-CHR_TIMER_THRESH = 7 -- change 12/24 display timer threshold
+LONGPRESS = 60 -- long press timer
+SHORTPRESS = 7 -- short press threshold
 
 nums = {
   [0] = { '100', '110', '600', '610', '601', '611', '101', '111', },
